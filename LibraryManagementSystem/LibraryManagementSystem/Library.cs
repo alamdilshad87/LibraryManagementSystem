@@ -176,4 +176,66 @@ public class Library
     {
         return _books;
     }
+<<<<<<< HEAD
+=======
+}
+class Program
+{
+    static void Main()
+    {
+        Library library = new Library();
+
+        library.AddBook("C++", "Raghav Raghuvanshi", "Programming");
+        library.AddBook("Harry Potter", "J.K. Rowling", "Fantasy");
+        library.AddBook("C# Basics", "Microsoft", "Programming");
+
+        library.AddMember("Dilshad");
+        library.AddMember("Gaurav");
+
+        Console.WriteLine("\nSearch by Title: C#");
+        List<Book> titleSearch = library.SearchByTitle("C#");
+        foreach (Book b in titleSearch)
+        {
+            PrintBook(b);
+        }
+
+        Console.WriteLine("\nSearch by Author: Rowling");
+        List<Book> authorSearch = library.SearchByAuthor("Rowling");
+        foreach (Book b in authorSearch)
+        {
+            PrintBook(b);
+        }
+
+        Console.WriteLine("\nSearch by Genre: Programming");
+        List<Book> genreSearch = library.SearchByGenre("Programming");
+        foreach (Book b in genreSearch)
+        {
+            PrintBook(b);
+        }
+        Console.WriteLine("\nBorrowing Book Id 1 by Member Id 1");
+        library.BorrowBook(1, 1);
+
+        Console.WriteLine("\nIs Book 1 Available?");
+        Console.WriteLine(library.IsAvailable(1));
+
+        Console.WriteLine("\nReturning Book Id 1");
+        library.ReturnBook(1, 1);
+
+        Console.WriteLine("\nIs Book 1 Available?");
+        Console.WriteLine(library.IsAvailable(1));
+
+        Console.WriteLine("\nAll Books:");
+        foreach (Book b in library.GetAllBooks())
+        {
+            PrintBook(b);
+        }
+    }
+
+    static void PrintBook(Book book)
+    {
+        Console.WriteLine(
+            "Id: " + book.Id +", Title: " + book.Title +", Author: " + book.Author +", Genre: " + book.Genre +", Available: " + book.IsAvailable
+        );
+    }
+>>>>>>> features/main
 }
