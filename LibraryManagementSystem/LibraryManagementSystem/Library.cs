@@ -56,7 +56,6 @@ public class Library
                 result.Add(book);
             }
         }
-
         return result;
     }
 
@@ -71,7 +70,6 @@ public class Library
                 result.Add(book);
             }
         }
-
         return result;
     }
 
@@ -86,7 +84,6 @@ public class Library
                 result.Add(book);
             }
         }
-
         return result;
     }
 
@@ -115,7 +112,6 @@ public class Library
                 break;
             }
         }
-
         foreach (Member m in _members)
         {
             if (m.Id == memberId)
@@ -124,29 +120,24 @@ public class Library
                 break;
             }
         }
-
         if (book == null)
         {
             Console.WriteLine("Book not found");
             return;
         }
-
         if (member == null)
         {
             Console.WriteLine("Member not found");
             return;
         }
-
         if (!book.IsAvailable)
         {
             Console.WriteLine("Book already borrowed");
             return;
         }
-
         book.IsAvailable = false;
         member.BorrowedBooks.Add(book);
     }
-
     public void ReturnBook(int bookId, int memberId)
     {
         Member member = null;
@@ -160,13 +151,11 @@ public class Library
                 break;
             }
         }
-
         if (member == null)
         {
             Console.WriteLine("Member not found");
             return;
         }
-
         foreach (Book b in member.BorrowedBooks)
         {
             if (b.Id == bookId)
@@ -175,17 +164,14 @@ public class Library
                 break;
             }
         }
-
         if (book == null)
         {
             Console.WriteLine("Book not borrowed by member");
             return;
         }
-
         book.IsAvailable = true;
         member.BorrowedBooks.Remove(book);
     }
-
     public List<Book> GetAllBooks()
     {
         return _books;
