@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Linq;
 public class Book
 {
-    public int Id;
-    public string Title;
-    public string Author;
-    public string Genre;
-    public bool IsAvailable;
+    public int Id { get; set; }
+    public string Title { get; set; }
+    public string Author { get; set; }
+    public string Genre { get; set; }
+    public bool IsAvailable { get; set; }
 }
-
 public class Member
 {
-    public int Id;
-    public string Name;
-    public List<Book> BorrowedBooks = new List<Book>();
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public List<Book> BorrowedBooks { get; set; } = new List<Book>();
 }
 public class Library
 {
@@ -57,7 +56,6 @@ public class Library
                 result.Add(book);
             }
         }
-
         return result;
     }
 
@@ -72,7 +70,6 @@ public class Library
                 result.Add(book);
             }
         }
-
         return result;
     }
 
@@ -87,7 +84,6 @@ public class Library
                 result.Add(book);
             }
         }
-
         return result;
     }
 
@@ -116,7 +112,6 @@ public class Library
                 break;
             }
         }
-
         foreach (Member m in _members)
         {
             if (m.Id == memberId)
@@ -125,29 +120,24 @@ public class Library
                 break;
             }
         }
-
         if (book == null)
         {
             Console.WriteLine("Book not found");
             return;
         }
-
         if (member == null)
         {
             Console.WriteLine("Member not found");
             return;
         }
-
         if (!book.IsAvailable)
         {
             Console.WriteLine("Book already borrowed");
             return;
         }
-
         book.IsAvailable = false;
         member.BorrowedBooks.Add(book);
     }
-
     public void ReturnBook(int bookId, int memberId)
     {
         Member member = null;
@@ -161,13 +151,11 @@ public class Library
                 break;
             }
         }
-
         if (member == null)
         {
             Console.WriteLine("Member not found");
             return;
         }
-
         foreach (Book b in member.BorrowedBooks)
         {
             if (b.Id == bookId)
@@ -176,17 +164,14 @@ public class Library
                 break;
             }
         }
-
         if (book == null)
         {
             Console.WriteLine("Book not borrowed by member");
             return;
         }
-
         book.IsAvailable = true;
         member.BorrowedBooks.Remove(book);
     }
-
     public List<Book> GetAllBooks()
     {
         return _books;
@@ -198,15 +183,15 @@ class Program
     {
         Library library = new Library();
 
-        library.AddBook("Clean Code", "Robert Martin", "Programming");
+        library.AddBook("C++", "Raghav Raghuvanshi", "Programming");
         library.AddBook("Harry Potter", "J.K. Rowling", "Fantasy");
         library.AddBook("C# Basics", "Microsoft", "Programming");
 
         library.AddMember("Dilshad");
         library.AddMember("Gaurav");
 
-        Console.WriteLine("\nSearch by Title: Clean");
-        List<Book> titleSearch = library.SearchByTitle("Clean");
+        Console.WriteLine("\nSearch by Title: C#");
+        List<Book> titleSearch = library.SearchByTitle("C#");
         foreach (Book b in titleSearch)
         {
             PrintBook(b);
@@ -219,6 +204,12 @@ class Program
             PrintBook(b);
         }
 
+        Console.WriteLine("\nSearch by Genre: Programming");
+        List<Book> genreSearch = library.SearchByGenre("Programming");
+        foreach (Book b in genreSearch)
+        {
+            PrintBook(b);
+        }
         Console.WriteLine("\nBorrowing Book Id 1 by Member Id 1");
         library.BorrowBook(1, 1);
 
@@ -227,6 +218,9 @@ class Program
 
         Console.WriteLine("\nReturning Book Id 1");
         library.ReturnBook(1, 1);
+
+        Console.WriteLine("\nIs Book 1 Available?");
+        Console.WriteLine(library.IsAvailable(1));
 
         Console.WriteLine("\nAll Books:");
         foreach (Book b in library.GetAllBooks())
@@ -238,11 +232,7 @@ class Program
     static void PrintBook(Book book)
     {
         Console.WriteLine(
-            "Id: " + book.Id +
-            ", Title: " + book.Title +
-            ", Author: " + book.Author +
-            ", Genre: " + book.Genre +
-            ", Available: " + book.IsAvailable
+            "Id: " + book.Id +", Title: " + book.Title +", Author: " + book.Author +", Genre: " + book.Genre +", Available: " + book.IsAvailable
         );
     }
 }
